@@ -36,7 +36,7 @@
     }
 
 .all_todos_container{
-      max-height: 400px ;
+      max-height: 300px ;
       overflow-y: auto;
       background-color: rgb(224, 224, 224);
       padding:10px;
@@ -179,12 +179,14 @@
 #confirm_delete{
     flex: 1;
     background-color: rgb(214, 6, 6);;
+    
  
 }
 
 #cancel_delete{
     flex: 1;
     background-color: rgb(0, 0, 0);
+
 
     
 }
@@ -212,4 +214,13 @@
   transform: translate(-50%, -50%);
 }
 
+
+#delete_all_todos{
+    background-color: rgb(241, 72, 72);
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    margin-top: 10px;
+    display: none;
+}
 
