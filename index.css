@@ -1,226 +1,223 @@
-*{
-     font-family: "Outfit", sans-serif;
+* {
+  font-family: "Outfit", sans-serif;
   font-optical-sizing: auto;
   overflow: hidden;
-
-
 }
 
-
-
-
-.container{
-    width: 100%;
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #e0f1fc; 
- 
+.container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e0f1fc;
 }
 
-
- .box {
-      width: 90%;
-      max-width: 400px;
-    
-      padding: 20px;
-      background-color: #f2f2f2;
-      border-radius: 8px;
-      text-align: center;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      z-index: 10;
-      display:flex;
-    
-      flex-direction: column;
-    }
-
-.all_todos_container{
-      max-height: 300px ;
-      overflow-y: auto;
-      background-color: rgb(224, 224, 224);
-      padding:10px;
-      border-radius: 10px;
-      display: none;
-
+.box {
+  width: 90%;
+  max-width: 400px;
+  padding: 20px;
+  background-color: #f2f2f2;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
 }
 
-
-
-
-    .btn_1{
-        background-color: rgb(160, 150, 150);
-        border-radius: 10px;
-        padding:16px;
-        color:rgb(196, 191, 191);
-        text-align: center;
-        margin:4px
-    }
-
-    .btn_1_active{
-
-          background-color: rgb(0, 0, 0);
-        border-radius: 10px;
-        padding:16px;
-        color:rgb(255, 255, 255);
-        text-align: center;
-        margin:4px
-
-    }
-
-    
-    
-
-    .add_todo_card{
-        display:flex;
-        background-color: rgb(133, 131, 131);
-        flex-direction: row;
-        padding:15px;
-        border-radius:10px;
-        margin-bottom: 10px;
-        margin-top: 10px;
-        justify-content: center;
-        align-items: center;
-
-
-      
-
-    }
-
-    .text_field{
-        border-radius: 10px;
-        padding:16px;
-        width:80%;
-        margin-right: 1px;
-        
-     
-    }
-    
-
-
-    .todo{
-        background-color: rgb(202, 202, 202);
-        padding:15px;
-        border-radius: 9px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 5px;
-      
-     
-       
-    }
-
- 
-
-    #head_title{
-        font-size: 30px;
-      
-    }
-
-
-    .done {
-    text-decoration: line-through;
-    opacity: 0.6;
-    color: grey;
+.all_todos_container {
+  max-height: 300px;
+  overflow-y: auto;
+  background-color: rgb(224, 224, 224);
+  padding: 10px;
+  border-radius: 10px;
+  display: none;
 }
 
-
-.delete_confirmation{
-    background-color: transparent;
-   
-    padding:10px;
-    border-radius: 10px;
-    display: none;
-    position: fixed;
-    width:100vw;
-    height:100vh;
-    top: 0;
-    left: 0;
-    z-index: 1000;
-
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 0;
-
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(0,0,0,0.1);  
-    pointer-events: auto;
-
-
-  
-    
+.btn_1 {
+  background-color: rgb(160, 150, 150);
+  border-radius: 10px;
+  padding: 16px;
+  color: rgb(196, 191, 191);
+  text-align: center;
+  margin: 4px;
 }
 
-.delete_text{
-    font-size: 19px;
-    color: rgb(248, 80, 80);
-    margin-bottom: 0px;
-    padding:10px
-    
+.btn_1_active {
+  background-color: rgb(0, 0, 0);
+  border-radius: 10px;
+  padding: 16px;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  margin: 4px;
 }
 
-.confirmation_buttons_container{
- 
-    display: flex;
-    width:70%;
-  
-    display: flex;
-    flex-direction: row;
-    justify-content:center;
-    align-items: center;
-
-
-
+.add_todo_card {
+  display: flex;
+  background-color: rgb(133, 131, 131);
+  flex-direction: row;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  justify-content: center;
+  align-items: center;
 }
 
-#confirm_delete{
-    flex: 1;
-    background-color: rgb(214, 6, 6);;
-    
- 
+.text_field {
+  border-radius: 10px;
+  padding: 16px;
+  width: 80%;
+  margin-right: 1px;
 }
 
-#cancel_delete{
-    flex: 1;
-    background-color: rgb(0, 0, 0);
-
-
-    
+.todo {
+  background-color: rgb(202, 202, 202);
+  padding: 15px;
+  border-radius: 9px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
 }
 
-.todo_to_delete{
-    background-color: rgb(236, 234, 234);
-    padding: 10px;
-    border-radius: 10px;
+#head_title {
+  font-size: 30px;
 }
 
+.done {
+  text-decoration: line-through;
+  opacity: 0.6;
+  color: grey;
+}
 
-.delete_card{
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    width:30vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+.delete_confirmation {
+  background-color: transparent;
+  padding: 10px;
+  border-radius: 10px;
+  display: none;
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(0,0,0,0.1);
+  pointer-events: auto;
+}
 
+.delete_text {
+  font-size: 19px;
+  color: rgb(248, 80, 80);
+  margin-bottom: 0px;
+  padding: 10px;
+}
+
+.confirmation_buttons_container {
+  display: flex;
+  width: 70%;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+#confirm_delete {
+  flex: 1;
+  background-color: rgb(214, 6, 6);
+}
+
+#cancel_delete {
+  flex: 1;
+  background-color: rgb(0, 0, 0);
+}
+
+.todo_to_delete {
+  background-color: rgb(236, 234, 234);
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.delete_card {
+  background-color: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 30vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
 
-
-#delete_all_todos{
-    background-color: rgb(241, 72, 72);
-    color: white;
-    padding: 10px;
-    border-radius: 10px;
-    margin-top: 10px;
-    display: none;
+#delete_all_todos {
+  background-color: rgb(241, 72, 72);
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+  margin-top: 10px;
+  display: none;
 }
 
+/* Actions container for edit & delete buttons */
+.todo_actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+
+.edit_btn {
+  background-color: rgb(77, 77, 77);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  padding: 5px;
+  border-style: none;
+  box-sizing: border-box;
+}
+
+.edit_btn i {
+  color: white;
+}
+
+.edit_btn:hover {
+  background-color: rgb(50, 50, 50);
+}
+
+/* Delete button styles */
+.delete_btn {
+  background-color: rgb(77, 77, 77);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  padding: 5px;
+  border-style: none;
+  box-sizing: border-box;
+}
+
+.delete_btn i {
+  color: white;
+}
+
+.delete_btn:hover {
+  background-color: rgb(50, 50, 50);
+}
+
+/* Input field for editing */
+.edit_input {
+  font-size: 16px;
+  padding: 4px;
+  width: 70%;
+}
