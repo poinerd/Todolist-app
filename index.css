@@ -32,7 +32,8 @@
   background-color: rgb(224, 224, 224);
   padding: 10px;
   border-radius: 10px;
-  display: none;
+  display: block;
+  margin-bottom: 0px;
 }
 
 .btn_1 {
@@ -72,15 +73,7 @@
   margin-right: 1px;
 }
 
-.todo {
-  background-color: rgb(202, 202, 202);
-  padding: 15px;
-  border-radius: 9px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 5px;
-}
+
 
 #head_title {
   font-size: 30px;
@@ -177,7 +170,8 @@
 
 
 .edit_btn {
-  background-color: rgb(77, 77, 77);
+  background-color: transparent;
+  color:black;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -185,19 +179,19 @@
   padding: 5px;
   border-style: none;
   box-sizing: border-box;
+  margin-right: 2px;
 }
 
-.edit_btn i {
-  color: white;
-}
+
 
 .edit_btn:hover {
-  background-color: rgb(50, 50, 50);
+  background-color: rgb(255, 255, 255);
 }
 
 /* Delete button styles */
 .delete_btn {
-  background-color: rgb(77, 77, 77);
+  background-color: transparent;
+  color: red;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -207,12 +201,9 @@
   box-sizing: border-box;
 }
 
-.delete_btn i {
-  color: white;
-}
 
 .delete_btn:hover {
-  background-color: rgb(50, 50, 50);
+  background-color: rgb(255, 255, 255);
 }
 
 /* Input field for editing */
@@ -220,4 +211,43 @@
   font-size: 16px;
   padding: 4px;
   width: 70%;
+  margin-left: 10px;
+  border-radius: 5px;
+}
+
+
+
+
+.todo {
+  background-color: rgb(202, 202, 202);
+  padding: 0px;
+  border-radius: 9px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+  box-sizing: border-box;
+  width: 100%;
+  
+}
+
+
+#todo_text{
+  margin-left: 15px;
+}
+
+.todo span{
+  color: black;
+}
+
+
+.buttons_container{
+  
+  padding: 10px;
+  display: flex;
+}
+
+#edit_btn{
+  margin-right: 5px;
+  background-color: transparent;
 }

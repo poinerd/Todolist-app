@@ -1,6 +1,5 @@
 const addTodo = document.getElementById("add_todo");
 const inputField = document.getElementById("input_field");
-const todoContainer = document.getElementById("todo_container"); 
 const deleteConfirmationCard = document.getElementById("delete_confirmation_card");
 const confirmDelete = document.getElementById("confirm_delete");
 const cancelDelete = document.getElementById("cancel_delete");
@@ -10,11 +9,10 @@ const deleteAllTodosButton = document.getElementById("delete_all_todos");
 
 let todos = [];
 let todoIndex = null;
-let deleteMode = "single"; // 'single' or 'all'
+let deleteMode = "single";
+const STORAGE_KEY = 'todos';
 
 addTodo.disabled = true;
-
-const STORAGE_KEY = 'todos';
 
 const saveTodos = () => {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(todos));
@@ -33,8 +31,6 @@ const loadTodos = () => {
 };
 
 function renderTodoList() {
-  todoContainer.innerHTML = "";
-
   if (todos.length === 0) {
     noTodos.style.display = "block";
     allTodosContainer.style.display = "none";
@@ -45,81 +41,79 @@ function renderTodoList() {
   noTodos.style.display = "none";
   deleteAllTodosButton.style.display = "block";
   allTodosContainer.style.display = "block";
+  allTodosContainer.innerHTML = '';
 
   todos.forEach((todo, index) => {
-    const SINGLE_TODO = document.createElement("div");
-    SINGLE_TODO.classList.add("todo");
-    if (todo.done) {
-      SINGLE_TODO.classList.add("done");
-    }
+    let task = document.createElement("div");
+    task.className = "todo";
+    task.innerHTML = `
+      <span id="todo_text" class="todo_text">${todo.text}</span>
+      <div class="buttons_container">
+        <button onclick="startEdit(${todo.id})" class="edit_btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-square-pen-icon lucide-square-pen"><path d="M12 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.375 2.625a1 1 0 0 1 3 3l-9.013 9.014a2 2 0 0 1-.853.505l-2.873.84a.5.5 0 0 1-.62-.62l.84-2.873a2 2 0 0 1 .506-.852z"/></svg></button>
 
-    const TEXT_SPAN = document.createElement("span");
-    TEXT_SPAN.textContent = todo.text;
-    TEXT_SPAN.addEventListener("click", () => {
-      todos[index].done = !todos[index].done;
-      saveTodos();
-      renderTodoList();
-    });
+        </button>
+        <button onclick="deleteTodo(event)" data-index="${index}" class="delete_btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
 
- 
-    const ACTIONS = document.createElement("div");
-    ACTIONS.classList.add("todo_actions");
-
-    const EDIT_BTN = document.createElement("button");
-    EDIT_BTN.innerHTML = '<i class="fa-solid fa-pen"></i>';
-    EDIT_BTN.classList.add("edit_btn");
-    EDIT_BTN.setAttribute("data-index", index);
-    EDIT_BTN.addEventListener("click", (event) => {
-      event.stopPropagation();
-      startEdit(index, TEXT_SPAN);
-    });
-
-    const DELETE_BTN = document.createElement("button");
-    DELETE_BTN.innerHTML = '<i class="fa-solid fa-trash"></i>';
-    DELETE_BTN.classList.add("delete_btn");
-    DELETE_BTN.setAttribute("data-index", index);
-    DELETE_BTN.addEventListener("click", (event) => {
-      event.stopPropagation();
-      todoIndex = parseInt(event.target.closest("button").getAttribute("data-index"));
-      display_confirmation("single");
-    });
-
-    ACTIONS.appendChild(EDIT_BTN);
-    ACTIONS.appendChild(DELETE_BTN);
-
-    SINGLE_TODO.appendChild(TEXT_SPAN);
-    SINGLE_TODO.appendChild(ACTIONS);
-    todoContainer.appendChild(SINGLE_TODO);
+        </button>
+      </div>
+    `;
+    allTodosContainer.appendChild(task);
   });
 }
 
-function startEdit(index, textSpan) {
-  const currentText = todos[index].text;
+function createTodo() {
+  if (check_input_field()) {
+    const INPUT_VALUE = inputField.value.trim();
+    const TASK = {
+      text: INPUT_VALUE,
+      done: false,
+      id: todos.length + 1
+    };
+    todos.push(TASK);
+    saveTodos();
+    renderTodoList();
+    inputField.value = "";
+    addTodo.disabled = true;
+    addTodo.classList.remove("btn_1_active");
+  }
+}
+
+function startEdit(id) {
+  const index = todos.findIndex(todo => todo.id === id);
+  if (index === -1) return;
+
+  const todoDiv = allTodosContainer.children[index];
+  const span = todoDiv.querySelector(".todo_text");
+
   const input = document.createElement("input");
   input.type = "text";
-  input.value = currentText;
-  input.classList.add("edit_input");
+  input.value = todos[index].text;
+  input.className = "edit_input";
 
-  textSpan.replaceWith(input);
+
+
+
+  span.replaceWith(input);
   input.focus();
 
-  input.addEventListener("keypress", (event) => {
-    if (event.key === "Enter") {
-      finishEdit(index, input.value.trim(), input);
+  const finishEdit = () => {
+    const newText = input.value.trim();
+    if (newText) {
+      todos[index].text = newText;
+      saveTodos();
+    }
+    renderTodoList();
+  };
+
+  input.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      finishEdit();
     }
   });
 
-  input.addEventListener("blur", () => {
-    finishEdit(index, input.value.trim(), input);
-  });
-}
-
-function finishEdit(index, newText, input) {
-  if (newText) {
-    todos[index].text = newText;
-    saveTodos();
-  }
-  renderTodoList();
+  input.addEventListener("blur", finishEdit);
 }
 
 function display_confirmation(mode) {
@@ -143,15 +137,7 @@ cancelDelete.addEventListener("click", () => {
 });
 
 function check_input_field() {
-  const todoText = inputField.value.trim();
-  if (todoText !== "") {
-    todos.push({ text: todoText, done: false });
-    saveTodos();
-    inputField.value = "";
-    addTodo.disabled = true;
-    addTodo.classList.remove("btn_1_active");
-    renderTodoList();
-  }
+  return inputField.value.trim() !== "";
 }
 
 inputField.addEventListener("input", () => {
@@ -164,15 +150,15 @@ inputField.addEventListener("input", () => {
   }
 });
 
-addTodo.addEventListener("click", (event) => {
+addTodo.addEventListener('click', (event) => {
   event.preventDefault();
-  check_input_field();
+  createTodo();
 });
 
 document.addEventListener("keypress", (event) => {
   if (event.key === "Enter" && document.activeElement === inputField) {
     event.preventDefault();
-    check_input_field();
+    createTodo();
   }
 });
 
@@ -181,6 +167,11 @@ deleteAllTodosButton.addEventListener("click", () => {
     display_confirmation("all");
   }
 });
+
+function deleteTodo(event) {
+  todoIndex = parseInt(event.target.closest("button").getAttribute("data-index"));
+  display_confirmation("single");
+}
 
 loadTodos();
 renderTodoList();
