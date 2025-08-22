@@ -1,20 +1,24 @@
 * {
   font-family: "Outfit", sans-serif;
   font-optical-sizing: auto;
-  overflow: hidden;
+
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
 .container {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #e0f1fc;
+  background-color: #ffffff;
+  padding: 1.5rem;
 }
 
 .box {
-  width: 90%;
+  width: 100%;
   max-width: 400px;
   padding: 20px;
   background-color: #f2f2f2;
@@ -24,6 +28,7 @@
   z-index: 10;
   display: flex;
   flex-direction: column;
+  gap: 1rem;
 }
 
 .all_todos_container {
@@ -33,16 +38,16 @@
   padding: 10px;
   border-radius: 10px;
   display: block;
-  margin-bottom: 0px;
+
 }
 
 .btn_1 {
   background-color: rgb(160, 150, 150);
   border-radius: 10px;
-  padding: 16px;
+  padding: 0.9rem;
   color: rgb(196, 191, 191);
   text-align: center;
-  margin: 4px;
+
 }
 
 .btn_1_active {
@@ -58,25 +63,24 @@
   display: flex;
   background-color: rgb(133, 131, 131);
   flex-direction: row;
-  padding: 15px;
+  padding: 1rem;
   border-radius: 10px;
-  margin-bottom: 10px;
-  margin-top: 10px;
   justify-content: center;
   align-items: center;
 }
 
 .text_field {
   border-radius: 10px;
-  padding: 16px;
+  padding: 0.9rem;
   width: 80%;
-  margin-right: 1px;
+
 }
 
 
 
 #head_title {
-  font-size: 30px;
+  font-size: 1.5rem;
+ 
 }
 
 .done {
@@ -119,6 +123,7 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  gap: 0.3rem;
 }
 
 #confirm_delete {
@@ -141,7 +146,7 @@
   background-color: white;
   padding: 20px;
   border-radius: 10px;
-  width: 30vw;
+  width: min(90%, 400px);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -155,10 +160,13 @@
 #delete_all_todos {
   background-color: rgb(241, 72, 72);
   color: white;
-  padding: 10px;
+  padding: 1rem;
   border-radius: 10px;
-  margin-top: 10px;
   display: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
 }
 
 /* Actions container for edit & delete buttons */
@@ -220,7 +228,7 @@
 
 .todo {
   background-color: rgb(202, 202, 202);
-  padding: 0px;
+
   border-radius: 9px;
   display: flex;
   justify-content: space-between;
@@ -228,12 +236,12 @@
   margin-bottom: 5px;
   box-sizing: border-box;
   width: 100%;
-  
+  padding: 5px;
 }
 
 
 #todo_text{
-  margin-left: 15px;
+  margin-left: 0.5rem;
 }
 
 .todo span{
@@ -245,9 +253,60 @@
   
   padding: 10px;
   display: flex;
+ 
 }
 
 #edit_btn{
   margin-right: 5px;
   background-color: transparent;
+}
+
+
+@media(min-width: 375px){
+  .container{
+    background-color: rgb(255, 255, 255);
+
+  }
+
+  .box{
+    max-height: 400px;
+    background-color: ;
+  }
+
+  .all_todos_container{
+    max-height: 150px;
+  }
+
+  .add_todo_card{
+    gap: 3px;
+
+
+  flex-direction: row;
+  padding: 0.7rem;
+
+
+  }
+
+  #delete_all_todos {
+
+  padding: 0.5rem;
+
+} 
+
+.buttons_container{
+  padding: 0.5rem;
+}
+
+.buttons_container svg{
+  
+  width: 20px;
+  height: 20px;
+ 
+}
+.confirmation_buttons_container button{
+  color: white;
+  gap: 20px;
+  padding: o.5rem;
+}
+
 }
